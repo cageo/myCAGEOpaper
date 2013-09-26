@@ -1,0 +1,48 @@
+%
+% This function launches HGS for given facies realizations 
+%
+% Author: Thomas Hermans
+% Date: November 2012
+
+
+function LaunchHGS(InputGrok,InputMprops,InputDefault,Zone_Name,directory_simu,prefix_simu)
+    
+%% Input parameters:
+
+%   - InputDeck: Full file name of the HGS grok file
+%   - InputProp: Full file name of the HGS mprops file
+%   - Zone_Name : Realization to be evaluated in zone HGS format
+%   - directory_simu: Directory where the simulations will be performed
+%   - Nreal: Number of simulations to perform
+%   - prefix_simu: prefix of the simulation output files
+
+%     if Nreal == 1
+        outputfile = [directory_simu prefix_simu];
+        % Copy the HGS grok file and update it with the facies field and
+        % Transform real into zones file for HGS
+        Update_HGS_grok(InputGrok,outputfile,Zone_Name);
+        copyfile(InputMprops,directory_simu);
+        copyfile(InputDefault,directory_simu);
+        % Create a file batch.pfx which contains the prefix of the grok
+        % file
+        fid = fopen([directory_simu '/batch.pfx'],'wt');
+        fprintf(fid,prefix_simu);
+        fclose(fid);
+        % Launch HGS
+        system('grok_opt')
+        system('hydro_opt')
+        system('
+%         dos(['set RLM_LICENSE= 28000@ERE-PCServ &&"D:/Softwares/studioSL-7.0/studiosl/modules/ext/3dsl-win-i86-2012.05.11.exe" "' outputfile '" > 3dsl.tmp']);
+%     else      
+%         for i = 1:Nreal
+%             perm_file = [directory_perms perm_name num2str(i) '.out'];
+%             outputfile = [directory_simu prefix_simu num2str(i)];
+%             % Copy the 3dsl deck and update it with the permeability field
+%             Update_3dsl_dat(InputDeck,outputfile,perm_file);
+%             % Launch 3dsl
+%             dos(['set RLM_LICENSE= 28000@ERE-PCServ &&"D:/Softwares/studioSL-7.0/studiosl/modules/ext/3dsl-win-i86-2012.05.11.exe" "' outputfile '" > 3dsl.tmp']);
+%         end
+%     end
+end
+
+ 

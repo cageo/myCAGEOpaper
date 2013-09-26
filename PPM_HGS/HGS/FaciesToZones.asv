@@ -1,0 +1,50 @@
+%
+% This function takes a facies realization (Gslib), attributes a constant
+% zone value at each facies and outputs it in HGS format
+%
+% Author: Thomas Hermans
+% Date: November 2012
+%
+function FaciesToZones(facies_file,Zone_name,nx,ny,nz)
+
+%% Input parameters:
+
+%   - facies_file: File name of facies realization
+%   - Zone_name: File name of permeability realization (prefix only)
+%   - nx, ny, nz: Dimensions of the grid
+
+
+    % Read the facies realization
+    act = readgslib(facies_file,1);
+    act_init = act;
+    zone=[1:length(act)];
+    
+    % Attribute a constant value to each zone
+    % T.H. Do once for each facies, find all value of the facies and
+    % attrribute zone (facies +1)
+    for i = 1:length(act_init)
+        act(i) = act_init+1;
+    end
+
+    % Write the realization in HGS Zone format
+    % Write in Eclipse format
+        fid = fopen([Zone_name '.out'], 'wt');
+        fprintf(fid,prop_name);
+        fprintf(fid,'\n');
+% T.H. Eclipse format seems to be different than SGEMS, this is not the
+% case for HGS
+        for k = nz-1:-1:0
+            for j = ny-1:-1:0
+                for i = 1:nx
+                    index = i+j*nx+k*nx*ny;
+                    fprintf(fid,'%f \t',act(index,l));
+                    fprintf(fid,'\n');
+                end
+            end
+        end
+
+        % Close files
+        fprintf(fid,'/');
+        fclose(fid);
+
+end

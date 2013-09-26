@@ -1,0 +1,154 @@
+!--------------------------  Problem description
+Synthetic case for an alluvial aquifer
+Size similar to Hermalle site
+Testing ppm method
+
+end title
+
+!--------------------------  Grid generation
+generate uniform blocks
+
+136.0 136
+58.0 58
+12.0 24
+
+end grid generation
+
+!--------------------------  General simulation parameters
+units: kilogram-metre-second
+!transient flow
+!unsaturated
+
+!initial timestep
+!0.01
+
+!saturation control
+!0.01
+
+!newton iteration control
+!25
+
+!########HERE###############
+!--------------------------  Porous media properties
+use domain type
+porous media
+
+properties file
+synthetic.mprops
+
+clear chosen zones
+
+!--------------------------  Define the zone from S-Gems
+read zones from file
+facies_true
+choose zone number
+1
+read properties
+sand
+clear chosen zones
+choose zone number
+2
+read properties
+gravel
+clear chosen zones
+choose zone number
+3
+read properties
+silt
+
+!=======================================
+!==============  F L O W  ==============
+!=======================================
+! === INITIAL FLOW CONDITIONS === !
+! - - - Pumping-well - - - !
+clear chosen nodes
+make well
+Xwell
+0.68e+02  0.29e+02  0.0e+01
+0.68e+02  0.29e+02  0.12e+02
+1
+0.0, -2.8e-2
+0.1e+03  0.50e+02  0.5e+01
+0.2
+0.2
+
+clear chosen nodes
+choose nodes all
+Initial head
+12.0
+
+! === FLOW BCs ====
+! - - - Boundaries with head - - -!
+! 12.0 everywhere
+! x=0
+clear chosen nodes
+choose nodes x plane
+0.0
+1.0e-3
+Specified head
+1
+0.0, 12.0
+! x=136
+clear chosen nodes
+choose nodes x plane
+136.0
+1.0e-3
+Specified head
+1
+0.0, 12.0
+! y=0
+clear chosen nodes
+choose nodes y plane
+0.0
+1.0e-3
+Specified head
+1
+0.0, 12.0
+! y=58
+clear chosen nodes
+choose nodes y plane
+58.0
+1.0e-3
+Specified head
+1
+0.0, 12.0
+
+Echo flow boundary conditions
+
+! === TIME CONTROL === !
+output times
+3.6e+3
+end
+
+!########HERE###############
+
+
+! === OUTPUT CONTROL === !
+make observation point
+P1
+0.38e+02  0.29e+02  5.0e+00
+make observation point
+P2
+0.98e+02  0.29e+02  5.0e+00
+make observation point
+P3
+0.68e+02  0.12e+02  5.0e+00
+make observation point
+P4
+0.68e+02  0.46e+02  5.0e+00
+make observation point
+P5
+0.53e+02  0.20e+02  5.0e+00
+make observation point
+P6
+0.53e+02  0.38e+02  5.0e+00
+make observation point
+P7
+0.83e+02  0.20e+02  5.0e+00
+make observation point
+P8
+0.83e+02  0.38e+02  5.0e+00
+make observation point
+P9
+0.68e+02  0.29e+02  5.0e+00
+!END OF GROK FILE

@@ -1,0 +1,58 @@
+!-------------------
+
+sand
+
+k anisotropic
+5.0e-4
+5.0e-4
+5.0e-5
+
+porosity
+0.3
+
+specific storage
+1.0e-6
+       
+bulk density
+2650.0
+
+end material
+!-------------------
+
+gravel
+
+k anisotropic
+1.0e-3
+1.0e-3
+1.0e-4
+
+porosity
+0.3
+
+specific storage
+1.0e-6
+       
+bulk density
+2650.0
+
+end material
+!-------------------
+
+silt
+
+k anisotropic
+5.0e-6
+5.0e-6
+5.0e-7
+
+porosity
+0.3
+
+specific storage
+1.0e-6
+       
+bulk density
+2650.0
+
+end material
+

@@ -1,0 +1,11 @@
+<!DOCTYPE gridGeometry>
+<Grid type="Cgrid" name="SoftProba">
+ <Geometry dx="1" dy="1" dz="0.5" ox="0" oy="0" nx="136" oz="0" ny="58" nz="24"/>
+ <Properties>
+  <GsTLGridProperty filepath="properties/property__z1.sgems" type="Continuous" name="z1"/>
+  <GsTLGridProperty filepath="properties/property__z2.sgems" type="Continuous" name="z2"/>
+  <GsTLGridProperty filepath="properties/property__z3.sgems" type="Continuous" name="z3"/>
+ </Properties>
+ <Regions/>
+ <PropertyGroups/>
+</Grid>

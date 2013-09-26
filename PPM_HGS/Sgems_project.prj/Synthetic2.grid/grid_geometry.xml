@@ -1,0 +1,14 @@
+<!DOCTYPE gridGeometry>
+<Grid type="Cgrid" name="Synthetic2">
+ <Geometry dx="1" dy="1" dz="0.5" ox="0" oy="0" nx="136" oz="0" ny="58" nz="24"/>
+ <Properties>
+  <GsTLGridProperty filepath="properties/property__ET1.sgems" type="Continuous" name="ET1"/>
+  <GsTLGridProperty filepath="properties/property__ET2.sgems" type="Continuous" name="ET2"/>
+  <GsTLGridProperty filepath="properties/property__ET3.sgems" type="Continuous" name="ET3"/>
+  <GsTLGridProperty filepath="properties/property__P1.sgems" type="Continuous" name="P1"/>
+  <GsTLGridProperty filepath="properties/property__P2.sgems" type="Continuous" name="P2"/>
+  <GsTLGridProperty filepath="properties/property__P3.sgems" type="Continuous" name="P3"/>
+ </Properties>
+ <Regions/>
+ <PropertyGroups/>
+</Grid>

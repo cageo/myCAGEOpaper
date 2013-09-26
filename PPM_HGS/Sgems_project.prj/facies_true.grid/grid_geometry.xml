@@ -1,0 +1,9 @@
+<!DOCTYPE gridGeometry>
+<Grid type="Cgrid" name="facies_true">
+ <Geometry dx="1" dy="1" dz="0.5" ox="0" oy="0" nx="136" oz="0" ny="58" nz="24"/>
+ <Properties>
+  <GsTLGridProperty filepath="properties/property__facies.sgems" type="Continuous" name="facies"/>
+ </Properties>
+ <Regions/>
+ <PropertyGroups/>
+</Grid>

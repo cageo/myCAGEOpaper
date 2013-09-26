@@ -1,0 +1,147 @@
+
+
+RUNOPTIONS         !Begins the RUNOPTIONS section.
+
+   
+   UNITS=FIELD     !Set the default units to METRIC
+   MODEL=IMMISCIBLE    !
+                    
+   TITLE="2D CHANNEL CASE"
+   GRAVITY=OFF
+
+NOSIM=OFF
+
+END RUNOPTIONS     !Ends the RUNOPTIONS section
+
+-- ==================================================================
+-- The GRID section contains info to build the static grid. Required.
+-- ==================================================================
+GRID
+
+NX=80                       !Set the Cartesian Dimensions of the problem
+NY=80
+NZ=1
+
+
+POROSITY
+0.15  /
+
+INCLUDE ='PERMX1.out'
+
+PERMY=PERMX                  !Copy x-permeability to y&z permeability
+PERMZ=PERMX
+
+DXV
+10.0 /
+
+DYV
+10.0 /
+
+DZV 
+5.0 /
+
+END GRID
+
+-- The PVT section contains data to specify the phase behavior.
+-- ============================================================
+
+PVT
+
+
+
+SCDENSITIES UNITS=F     
+40 0.070 62     /        
+
+CVISCOSITIES             
+3 0.01 1.0   /    
+                        
+
+END PVT
+
+-- ============================================================
+-- The RELPERMS section contains data to specify the relative 
+-- permeability functions for the various phases. 
+-- ============================================================
+
+RELPERMS
+
+-- KRW = SW^3
+-- KRO = (1-SW)^2
+KRWO
+0	0	1
+0.1	0.001	0.81
+0.2	0.008	0.64
+0.3	0.027	0.49
+0.4	0.064	0.36
+0.5	0.125	0.25
+0.6	0.216	0.16
+0.7	0.343	0.09
+0.8	0.512	0.04
+0.9	0.729	0.01
+1	1	0
+/
+
+KRWMAX
+0.3 /
+
+-- Irreducible Sw = 0.2
+SWCRAVG
+0.2 /
+
+-- SORW = 0.3
+SOWCRAVG
+0.3 /
+
+
+END RELPERMS
+
+-- ============================================================
+-- The INITIALCOND section contains data to specify the initial
+-- conditions of the reservoir.
+-- ============================================================
+
+INITIALCOND
+
+
+END INITIALCOND        
+
+BOUNDARIES
+END BOUNDARIES
+
+-- ============================================================
+-- The OUTPUT section contains data to control output of grid-type data.
+-- ============================================================
+
+OUTPUT  
+
+3DSLFMT=ON
+ECLIPSEFMT= OFF
+!sat=1
+END OUTPUT
+
+-- ============================================================
+-- The RECURRENT section contains all the data pertaining to the definition
+-- of wells  and the recurremt data (TIME). The WELLS
+-- keyword must be read before any TIME-keyword
+-- ============================================================
+
+TUNING3D
+DPVMAX=1000
+DTMAX=10000
+END
+
+
+RECURRENT
+WELLS
+NAME=P1 TYPE=P DIR=Z I=15 J=65 K=1 DIA= 0.1 COMP= 1 SKIN= 0
+NAME=I1 TYPE=I DIR=Z I=65 J=15 K=1 DIA= 0.1 COMP= 1 SKIN= 0
+/
+
+
+TIME=0  nt=20
+NAME=P1   BHP=100
+NAME=I1   RTRAT=50 ZWAT=1
+
+TIME=500
+
+END RECURRENT
